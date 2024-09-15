@@ -1,0 +1,24 @@
+name: Update README
+
+on:
+  schedule:
+    # Update every 90 minutes
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+
+jobs:
+  activity:
+    name: Update README with recent activity
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Add activity to readme
+        uses: Readme-Workflows/recent-activity@v2.4.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
